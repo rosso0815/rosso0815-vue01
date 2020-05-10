@@ -10,6 +10,5 @@ Frontend :
 
 Backend:
     ( cd backend && refresh run ) &
-
-
+    use reflex as : reflex -d none -s -R vendor. -r \.go$ -- go run cmd/server/main.go
 

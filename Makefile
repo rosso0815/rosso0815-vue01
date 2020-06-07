@@ -33,20 +33,32 @@ install: go-get
 
 ## start: Start in development mode. Auto-starts when code changes.
 start:
-	@bash -c "trap 'make stop' EXIT; $(MAKE) clean compile start-server watch run='make clean compile start-server'"
+	#@bash -c "trap 'make stop' EXIT; $(MAKE) clean compile start-server watch run='make clean compile start-server'"
+	@echo "--- start"
+	@echo "start npm"
+	@-( cd frontend && npm run serve ) &
+	@echo "start go"
+	@-( cd backend &&  reflex -d none -s -R vendor. -r \.go$$ -- go run cmd/server/main.go ) &
 
 ## stop: Stop development mode.
-stop: stop-server
+stop:
+	@echo "stop npm 0"
+	@-ps -ef | grep npm | awk '{ print $$2 }' | xargs -I{} kill -9 {}
+	@echo "stop npm 1"
+	@-ps -ef | grep npm || true
+	@echo "stop go"
+	@-ps -ef | grep reflex | awk '{ print $$2 }' | xargs -I{} kill -9 {}
+	@-ps -ef | grep reflex
 
 start-server: stop-server
-	@echo "  >  $(PROJECTNAME) is available at $(ADDR)"
-	@-$(GOBIN)/$(PROJECTNAME) 2>&1 & echo $$! > $(PID)
-	@cat $(PID) | sed "/^/s/^/  \>  PID: /"
+	#@echo "  >  $(PROJECTNAME) is available at $(ADDR)"
+	#@-$(GOBIN)/$(PROJECTNAME) 2>&1 & echo $$! > $(PID)
+	#@cat $(PID) | sed "/^/s/^/  \>  PID: /"
 
 stop-server:
-	@-touch $(PID)
-	@-kill `cat $(PID)` 2> /dev/null || true
-	@-rm $(PID)
+	#@-touch $(PID)
+	#@-kill `cat $(PID)` 2> /dev/null || true
+	#@-rm $(PID)
 
 ## watch: Run given command when code changes. e.g; make watch run="echo 'hey'"
 watch:

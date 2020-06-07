@@ -13,45 +13,45 @@
 import axios from 'axios'
 
 export default {
-  name: "MyAbout",
+  name: 'MyAbout',
   components: {},
-  data() {
+  data () {
     return {
-      message: "hello",
-      config: ""
-    };
-  },
-  computed: {
-    count() {
-      // console.log('count = ' + store.state.count)
-      return this.$store.state.count;
+      message: 'hello',
+      config: ''
     }
   },
-  created: function() {
-    console.log("@@@ created")
+  computed: {
+    count () {
+      // console.log('count = ' + store.state.count)
+      return this.$store.state.count
+    }
+  },
+  created: function () {
+    console.log('@@@ created')
 
-    var _this= this
+    var _this = this
     // Make a request for a user with a given ID
     axios
-      .get("api/config")
-      .then(function(response) {
+      .get('api/config')
+      .then(function (response) {
         // handle success
-        console.log(response);
+        console.log(response)
         _this.config = response.data
       })
-      .catch(function(error) {
+      .catch(function (error) {
         // handle error
-        console.log(error);
+        console.log(error)
       })
-      .finally(function() {
+      .finally(function () {
         // always executed
-      });
+      })
   },
 
   methods: {
-    upCounter: function() {
-      this.$store.commit("increment");
-      console.log("upCounter")
+    upCounter: function () {
+      this.$store.commit('increment')
+      console.log('upCounter')
     }
   }
 }

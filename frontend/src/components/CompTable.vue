@@ -2,24 +2,24 @@
 <script>
 // @ is an alias to /src
 
-import axios from "axios";
+import axios from 'axios'
 
 export default {
-  name: "CompTable",
+  name: 'CompTable',
 
   props: {
     title: String
   },
 
-  data() {
+  data () {
     return {
-      info: "<pls define>",
+      info: '<pls define>',
       items: [],
       fields: [
-        { key: "id", label: "Id", sortable: true },
-        { key: "userId", label: "UserId", sortable: true },
-        { key: "title", label: "Title", sortable: true },
-        { key: "body", label: "Body" }
+        { key: 'id', label: 'Id', sortable: true },
+        { key: 'userId', label: 'UserId', sortable: true },
+        { key: 'title', label: 'Title', sortable: true },
+        { key: 'body', label: 'Body' }
       ],
       totalRows: 100,
       currentPage: 1,
@@ -27,42 +27,42 @@ export default {
       pageOptions: [5, 10, 15],
       sortBy: null,
       sortDesc: false,
-      sortDirection: "asc",
+      sortDirection: 'asc',
       filter: null,
-      status: "",
-      sortOptions: "",
+      status: '',
+      sortOptions: '',
       selected: [],
-      boxOne: "",
-      boxTwo: ""
-    };
+      boxOne: '',
+      boxTwo: ''
+    }
   },
-  created() {
+  created () {
     axios
-      .get("data.json")
+      .get('data.json')
       .then(response => {
         // JSON responses are automatically parsed.
-        console.log("load data");
-        this.items = response.data;
+        console.log('load data')
+        this.items = response.data
       })
       .catch(e => {
-        this.errors.push(e);
-      });
+        this.errors.push(e)
+      })
   },
   methods: {
-    log(text) {
-      console.log("log +> " + text);
+    log (text) {
+      console.log('log +> ' + text)
     },
 
-    filterGrid(val1, val2) {
-      console.log("@@@ filterGrid val1=" + val1 + " , val2=" + val2);
-      return true;
+    filterGrid (val1, val2) {
+      console.log('@@@ filterGrid val1=' + val1 + ' , val2=' + val2)
+      return true
     },
 
-    rowSelected(selected) {
-      //console.log('type='+typeof selected)
+    rowSelected (selected) {
+      // console.log('type='+typeof selected)
       if (typeof selected[0]._showDetails !== undefined) {
-      console.log("@@@ selected = " + selected[0].id)
-      if (selected[0]._showDetails === true) {
+        console.log('@@@ selected = ' + selected[0].id)
+        if (selected[0]._showDetails === true) {
           console.log('showDetails false')
           selected[0]._showDetails = false
         } else {
@@ -72,8 +72,8 @@ export default {
       }
     },
 
-    showDetail() {
-      console.log("@@@ showDetail");
+    showDetail () {
+      console.log('@@@ showDetail')
       // var t = this.selected
       // t.body = 'gugusseli'
       // this.items.splice(1, 1, t)
@@ -84,25 +84,25 @@ export default {
       // this.items = a
     },
 
-    showDialog() {
-      console.log("showDialog");
+    showDialog () {
+      console.log('showDialog')
     },
 
-    edit() {
-      console.log("@@@ edit modal");
-      this.$bvModal.show("modal-1");
+    edit () {
+      console.log('@@@ edit modal')
+      this.$bvModal.show('modal-1')
     },
-    clone() {
-      console.log("@@@ clone modal");
+    clone () {
+      console.log('@@@ clone modal')
       // this.$bvModal.show("modal-1");
     },
-    toDelete() {
-      console.log("@@@ toDelete modal selected=" + this.selected);
+    toDelete () {
+      console.log('@@@ toDelete modal selected=' + this.selected)
 
       if (this.selected === null || this.selected.length < 1) {
-        this.$bvModal.msgBoxOk("pls select a row");
+        this.$bvModal.msgBoxOk('pls select a row')
       } else {
-        this.$bvModal.msgBoxOk("selected row will be deleted")
+        this.$bvModal.msgBoxOk('selected row will be deleted')
       }
     }
   },

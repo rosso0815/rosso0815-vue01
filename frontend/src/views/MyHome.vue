@@ -1,9 +1,11 @@
 <template>
   <div class="home">
-    <HelloWorld msg="HomeDialog"/>
-    count = {{ count }}
+    <HelloWorld msg="HomeDialog" />
+    count == {{ count }}
     <div class="mouse">
-      <a v-on:mouseover="mouseover" v-on:mouseleave="mouseleave">{{message}}</a>
+      <a v-on:mouseover="mouseover" v-on:mouseleave="mouseleave">{{
+        message
+      }}</a>
     </div>
   </div>
 </template>
@@ -37,34 +39,32 @@
 
 // import store from './store'
 
-import HelloWorld from '@/components/HomeDialog.vue'
+import HelloWorld from "@/components/HomeDialog.vue";
 
 export default {
-  name: 'MyHome',
+  name: "MyHome",
   components: {
     HelloWorld
   },
-  data () {
+  data() {
     return {
       // count: 0,
-      message: 'hello'
-    }
+      message: "hello"
+    };
   },
   computed: {
-    count () {
-      return this.$store.state.count
+    count() {
+      return this.$store.state.count;
     }
-
   },
 
   methods: {
-    mouseover: function () {
-      this.message = 'Good!'
+    mouseover: function() {
+      this.message = "Good!";
     },
-    mouseleave: function () {
-      this.message = 'Hover Me!'
+    mouseleave: function() {
+      this.message = "Hover Me!";
     }
   }
-}
-
+};
 </script>

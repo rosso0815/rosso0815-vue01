@@ -4,6 +4,7 @@ import Router from 'vue-router'
 
 import MyHome from './views/MyHome.vue'
 import MyTable from './views/MyTable.vue'
+import MyAjax from './views/MyAjax.vue'
 import MyAbout from './views/MyAbout.vue'
 
 Vue.use(Router)
@@ -19,6 +20,11 @@ export default new Router({
       path: '/tableList',
       name: 'mytable',
       component: MyTable
+    },
+    {
+      path: '/ajax',
+      name: 'mytable',
+      component: MyAjax
     },
     {
       path: '/about',

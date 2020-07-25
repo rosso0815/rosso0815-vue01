@@ -10,6 +10,8 @@ VERSION := $(shell git describe --tags)
 BUILD := $(shell git rev-parse --short HEAD)
 PROJECTNAME := $(shell basename "$(PWD)")
 
+BASE := $(shell pwd)
+
 # Go related variables.
 GOBASE := $(shell pwd)
 GOPATH := $(GOBASE)/vendor:$(GOBASE)
@@ -38,7 +40,7 @@ start:
 	@echo "start npm"
 	@-( cd frontend && npm run serve ) &
 	@echo "start go"
-	@-( cd backend &&  reflex -d none -s -R vendor. -r \.go$$ -- go run cmd/server/main.go ) &
+	@-( cd backend &&  reflex -d none -s -R vendor. -r \.go$$ -- go run main.go ) &
 
 ## stop: Stop development mode.
 stop:
@@ -79,8 +81,19 @@ exec:
 
 ## clean: Clean build files. Runs `go clean` internally.
 clean:
-	@-rm $(GOBIN)/$(PROJECTNAME) 2> /dev/null
-	@-$(MAKE) go-clean
+	@echo "--- clean"
+	@-rm -rf $(BASE)/backend/static/*
+	@-rm backend/vue01
+	#@-rm $(GOBIN)/$(PROJECTNAME)
+	#@-$(MAKE) go-clean
+	@echo "--- clean done"
+
+prod:	clean
+	@echo "--- prod"
+	cd frontend && npm run build
+	cp -r frontend/dist/* backend/static/
+	cd backend && go build -o vue01
+	@echo "--- prod done"
 
 go-compile: go-get go-build
 

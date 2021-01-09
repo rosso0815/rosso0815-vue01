@@ -1,0 +1,6 @@
+{
+    "terminal.integrated.inheritEnv": true,
+    "taskExplorer.pathToMake": "make"
+    // "terminal.integrated.automationShell.osx": "/usr/local/bin/bash",
+    //"terminal.integrated.env.osx": {"PATH":"/usr/local/bin"}
+}
